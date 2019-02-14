@@ -18,6 +18,8 @@ public class KnightBoard{
 	    for (int j = 0; j < board[0].length; j++) {
 		if (board[i][j] == 0) {
 		    output += " _";
+		} else if (board[i][j] < 10) {
+		    output += " " + board[i][j] + " ";
 		} else {
 		    output += board[i][j] + " ";
 		}
@@ -49,11 +51,9 @@ public class KnightBoard{
 		board[row][col] = level;
 		level++;
 	    } else {
-		board[row][col] = 0;
-		level--;
 		return false;
 	    }
-	    return solveH(row + 2, col + 1, level) || solveH(row + 2, col - 1, level) || solveH(row + 1, col + 2, level) || solveH(row + 1, col - 2, level) || solveH(row-2, col + 2, level) || solveH(row-1, col - 2, level) || solveH(row + 2, col - 1, level) || solveH(row-2, col -1, level);
+	    return solveH(row + 2, col + 1, level) || solveH(row + 2, col - 1, level) || solveH(row + 1, col + 2, level) || solveH(row + 1, col - 2, level) || solveH(row-1, col + 2, level) || solveH(row-1, col - 2, level) || solveH(row + 2, col - 1, level) || solveH(row-2, col -1, level);
 	}
     }
     public boolean solve(int startingRow, int startingCol) {
