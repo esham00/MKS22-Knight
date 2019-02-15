@@ -53,7 +53,14 @@ public class KnightBoard{
 	    } else {
 		return false;
 	    }
-	    return solveH(row + 2, col + 1, level) || solveH(row + 2, col - 1, level) || solveH(row + 1, col + 2, level) || solveH(row + 1, col - 2, level) || solveH(row-1, col + 2, level) || solveH(row-1, col - 2, level) || solveH(row + 2, col - 1, level) || solveH(row-2, col -1, level);
+	    // return solveH(row + 2, col + 1, level)
+	    // 	|| solveH(row + 2, col - 1, level)
+	    // 	|| solveH(row + 1, col + 2, level)
+	    // 	|| solveH(row + 1, col - 2, level)
+	    // 	|| solveH(row-1, col + 2, level)
+	    // 	|| solveH(row-1, col - 2, level)
+	    // 	|| solveH(row + 2, col - 1, level)
+	    // 	|| solveH(row-2, col -1, level);
 	}
     }
     public boolean solve(int startingRow, int startingCol) {
