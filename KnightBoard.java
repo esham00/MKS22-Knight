@@ -47,20 +47,44 @@ public class KnightBoard{
 	    if (row >= board.length || col >= board.length || row < 0 || col < 0) {
 		return false;
 	    }
-	    if (board[row][col] == 0) {
-		board[row][col] = level;
-		level++;
-	    } else {
-		return false;
+
+	    for (int i = 0; i < board.length * board[0].length; i++) {
+		if (addKnight(row, col, level)) {
+		    board[row][col] = level;
+		    if (solveH(row + 2, col + 1, level + 1) == true
+			|| solveH(row + 2, col - 1, level + 1) == true
+			|| solveH(row + 1, col + 2, level + 1) == true
+			|| solveH(row + 1, col - 2, level + 1) == true
+			|| solveH(row - 1, col + 2, level + 1) == true
+			|| solveH(row - 1, col - 2, level + 1) == true
+			|| solveH(row + 2, col - 1, level + 1) == true
+			|| solveH(row - 2, col - 1, level + 1) == true) {
+			return true;
+		    }
+		    removeKnight(row, col);
+		}
 	    }
-	    // return solveH(row + 2, col + 1, level)
-	    // 	|| solveH(row + 2, col - 1, level)
-	    // 	|| solveH(row + 1, col + 2, level)
-	    // 	|| solveH(row + 1, col - 2, level)
-	    // 	|| solveH(row-1, col + 2, level)
-	    // 	|| solveH(row-1, col - 2, level)
-	    // 	|| solveH(row + 2, col - 1, level)
-	    // 	|| solveH(row-2, col -1, level);
+	}
+	return false;
+    }
+    //adding knight at xy coordinate		
+    private boolean addKnight(int r, int c, int level) {
+	//works only if a knight hasn't been there
+	if (board[r][c] == 0) {
+	    board[r][c] = level;
+	    return true;
+	} else {
+	    return false;
+	}
+    }
+    //removing knight at xy coordinate
+    private boolean removeKnight(int r, int c) {
+	//works only if a knight has been there
+	if (board[r][c] > 0) {
+	    board[r][c] = 0;
+	    return true;
+	} else {
+	    return false;
 	}
     }
     public boolean solve(int startingRow, int startingCol) {
