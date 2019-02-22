@@ -41,7 +41,7 @@ public class KnightBoard{
 	// 	return false;
 	//     }
 	// }
-	if (level == board.length * board[0].length) {
+	if (level == 1 + board.length * board[0].length) {
 	    return true;
 	} else {
 	    if (row >= board.length || col >= board.length || row < 0 || col < 0) {
