@@ -85,19 +85,22 @@ public class KnightBoard{
 	    return 1;
 	}
 	int solutions = 0;
-	for (int x = 0; x < board.length; x++) {
-	    for (int y = 0; y < board[0].length; y++) {
-		if (addKnight(x,y,x+1)) {
-		    solutions += countSolutionsH(x,y, step + 1);
-		}
-		removeKnight(x,y);
-	    }
+	if (addKnight(row,col,step)) {
+	    solutions += countSolutionsH(row + 2, col + 1, step + 1);
+	    solutions += countSolutionsH(row + 2, col - 1, step + 1);
+	    solutions += countSolutionsH(row + 1, col + 2, step + 1);
+	    solutions += countSolutionsH(row + 1, col - 2, step + 1); 
+	    solutions += countSolutionsH(row - 1, col + 2, step + 1); 
+	    solutions += countSolutionsH(row - 1, col - 2, step + 1); 
+	    solutions += countSolutionsH(row - 2, col + 1, step + 1); 
+	    solutions += countSolutionsH(row - 2, col - 1, step + 1);
+	    removeKnight(row, col);
 	}
 	return solutions;
     }
 	    
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(3, 10);
+	KnightBoard a = new KnightBoard(3, 4);
 	a.solve(0,0);
 	System.out.println(a);
 	//System.out.println(a.countSolutions(0,0));
