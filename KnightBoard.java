@@ -32,7 +32,7 @@ public class KnightBoard{
 	if (level == 1 + board.length * board[0].length) {
 	    return true;
 	} else {
-	    if (row >= board.length || col >= board.length || row < 0 || col < 0|| row >= board[0].length || col >= board[0].length) {
+	    if (row >= board.length || row < 0 || col < 0 || col >= board[0].length) {
 		return false;
 	    } 
 	    if (addKnight(row, col, level)) {
@@ -84,6 +84,9 @@ public class KnightBoard{
 	if (step == board.length * board[0].length) {
 	    return 1;
 	}
+	if (row >= board.length || row < 0 || col < 0 || col >= board[0].length) {
+	    return 0;
+	}
 	int solutions = 0;
 	if (addKnight(row,col,step)) {
 	    solutions += countSolutionsH(row + 2, col + 1, step + 1);
@@ -100,7 +103,7 @@ public class KnightBoard{
     }
 	    
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(3, 4);
+	KnightBoard a = new KnightBoard(3,4);
 	a.solve(0,0);
 	System.out.println(a);
 	//System.out.println(a.countSolutions(0,0));
