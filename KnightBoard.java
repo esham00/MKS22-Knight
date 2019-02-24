@@ -29,30 +29,24 @@ public class KnightBoard{
 	return output;
     }
     private boolean solveH(int row, int col, int level) {
-	if (board.length <=2 || board[0].length <= 2 || (board.length % 2 == 1 && board[0].length % 2 == 1) || board.length == 4 || board[0].length == 4) {
-	    return false;
-	}
 	if (level == 1 + board.length * board[0].length) {
 	    return true;
 	} else {
-	    if (row >= board.length || col >= board.length || row < 0 || col < 0) {
+	    if (row >= board.length || col >= board.length || row < 0 || col < 0|| row >= board[0].length || col >= board[0].length) {
 		return false;
-	    }
-
-		if (addKnight(row, col, level)) {
-		    if (solveH(row + 2, col + 1, level + 1) == true
-			|| solveH(row + 2, col - 1, level + 1) == true
-			|| solveH(row + 1, col + 2, level + 1) == true
-			|| solveH(row + 1, col - 2, level + 1) == true
-			|| solveH(row - 1, col + 2, level + 1) == true
-			|| solveH(row - 1, col - 2, level + 1) == true
-			|| solveH(row + 2, col - 1, level + 1) == true
-			|| solveH(row - 2, col - 1, level + 1) == true) {
-			return true;
-		    }
-		    else {
-			removeKnight(row, col);
-		}
+	    } 
+	    if (addKnight(row, col, level)) {
+		if (solveH(row + 2, col + 1, level + 1) == true
+		    || solveH(row + 2, col - 1, level + 1) == true
+		    || solveH(row + 1, col + 2, level + 1) == true
+		    || solveH(row + 1, col - 2, level + 1) == true
+		    || solveH(row - 1, col + 2, level + 1) == true
+		    || solveH(row - 1, col - 2, level + 1) == true
+		    || solveH(row - 2, col + 1, level + 1) == true
+		    || solveH(row - 2, col - 1, level + 1) == true) {
+		    return true;
+		} 
+		removeKnight(row, col);
 	    }
 	}
 	return false;
@@ -78,6 +72,9 @@ public class KnightBoard{
 	}
     }
     public boolean solve(int startingRow, int startingCol) {
+	// if (board.length <=2 || board[0].length <= 2 || (board.length % 2 == 1 && board[0].length % 2 == 1) || board.length == 4 || board[0].length == 4) {
+	//     return false;
+	// }
 	return solveH(startingRow, startingCol, 1);
     }
     public int countSolutions(int startingRow, int startingCol) {
@@ -100,9 +97,9 @@ public class KnightBoard{
     }
 	    
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(3,10);
+	KnightBoard a = new KnightBoard(3, 10);
 	a.solve(0,0);
-	 System.out.println(a);
-	//	System.out.println(a.countSolutions(0,0));
+	System.out.println(a);
+	//System.out.println(a.countSolutions(0,0));
     }
 }
