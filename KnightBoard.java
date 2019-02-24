@@ -90,7 +90,7 @@ public class KnightBoard{
 	return solveH(startingRow, startingCol, 1);
     }
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(5,5);
+	KnightBoard a = new KnightBoard(10,10);
 	a.solve(0, 0);
 	System.out.println(a);
     }
