@@ -84,11 +84,8 @@ public class KnightBoard{
 	if (step == board.length * board[0].length) {
 	    return 1;
 	}
-	if (row >= board.length || row < 0 || col < 0 || col >= board[0].length) {
-	    return 0;
-	}
 	int solutions = 0;
-	if (addKnight(row,col,step)) {
+	if (row < board.length && row >= 0 && col >= 0 && col < board[0].length && addKnight(row,col,step)) {
 	    solutions += countSolutionsH(row + 2, col + 1, step + 1);
 	    solutions += countSolutionsH(row + 2, col - 1, step + 1);
 	    solutions += countSolutionsH(row + 1, col + 2, step + 1);
