@@ -163,13 +163,17 @@ public class KnightBoard{
 	//count solutions helper
 	return countSolutionsH(0,0,0);
     }
+    //count solutions helper
     private int countSolutionsH(int row, int col, int step) {
 	int solutions = 0;
-	if (step >= board.length * board[0].length) {
+	//if the step reached the limits of the board: that's one solution
+	if (step == board.length * board[0].length) {
 	    return 1;
 	}
+	//if if it hasn't: test all moves
 	else if (addKnight(row,col,step)) {
 	    for (int i = 0; i < rowMoves.length; i++) {
+		//reiterate move to see all possible ways it works
 		solutions += countSolutionsH(row + rowMoves[i], col + colMoves[i], step+1);
 	    }
 	    removeKnight(row, col);
@@ -209,6 +213,9 @@ public class KnightBoard{
 	// a.solve(0,0);
 	// System.out.println(a);
 	System.out.println(a.countSolutions(0,0));
+	for (int i = 0; i < 5; i++) {
+	    runTest(i);
+	}
     }
 }
 
