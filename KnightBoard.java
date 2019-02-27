@@ -32,7 +32,7 @@ public class KnightBoard{
 	}
 	return output;
     }
-    private boolean minMoves(int row, int col, int move){
+    private int  minMoves(int row, int col, int move){
 	if (row < board.length && col < board[0].length && row >= 0 && col >=0) {
 	    int moves = 0;
 	    for (int i = 0; i < rowMoves.length; i++) {
@@ -40,24 +40,31 @@ public class KnightBoard{
 		    moves++;
 		}
 	    }
+	    System.out.println(moves + " vs. " + move);
+	    System.out.println(row + ", " + col);
 	    if (moves < move) {
-		System.out.println(row + ", " + col);
+		System.out.println("changed it");
 		minRow[0] = row;
 	        minCol[0] = col;
 	    }
-	    return true;
+	    return moves;
 	} else {
-	    return false;
+	    return 0;
 	}
     }
     private boolean solveH(int row, int col, int level) {
-	if (level == board.length * board[0].length) {
+	if (level == 1 + board.length * board[0].length) {
 	    board[row][col] = level;
 	    return true;
 	} else {
+	    int moves = 8;
+	    int tempMove = 8;
 	    if (addKnight(row, col, level)) {
 		for(int i = 0; i < rowMoves.length; i++) {
-		    minMoves(row + rowMoves[i], col + colMoves[i], 8);
+		    tempMove = minMoves(row + rowMoves[i], col + colMoves[i], moves);
+		    if (tempMove != 0 && tempMove < moves) {
+			moves = tempMove;
+		    }
 		}
 		if (solveH(minRow[0], minCol[0], level+1)) {
 		    return true;
