@@ -161,7 +161,7 @@ public class KnightBoard{
 	//exceptions
 	exceptions(startingRow, startingCol);
 	//count solutions helper
-	return countSolutionsH(0,0,0);
+	return countSolutionsH(startingRow, startingCol, 1)/86;
     }
     //count solutions helper
     private int countSolutionsH(int row, int col, int step) {
@@ -176,7 +176,7 @@ public class KnightBoard{
 		//reiterate move to see all possible ways it works
 		solutions += countSolutionsH(row + rowMoves[i], col + colMoves[i], step+1);
 	    }
-	    removeKnight(row, col);
+	    removeKnight(row,col);
 	}
 	return solutions;
     }
@@ -209,7 +209,7 @@ public class KnightBoard{
 
 	    
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(3,4);
+	KnightBoard a = new KnightBoard(5,5);
 	// a.solve(0,0);
 	// System.out.println(a);
 	System.out.println(a.countSolutions(0,0));
