@@ -3,7 +3,7 @@ public class KnightBoard{
     private int[][] board;
     private int[] rowMoves = new int[]{1,1,2,2,-1,-1,-2,-2};
     private int[] colMoves = new int[]{2,-2,1,-1,2,-2,1,-1};
-    private int[] minRow = new int [1];
+    private int[] minRow = new int[1];
     private int[] minCol = new int[1];
     public KnightBoard(int startingRows, int startingCols) {
 	if (startingRows <= 0 || startingCols <= 0) {
@@ -40,13 +40,15 @@ public class KnightBoard{
 		    moves++;
 		}
 	    }
-	    System.out.println(moves + " vs. " + move);
-	    System.out.println(row + ", " + col);
-	    if (moves < move) {
-		System.out.println("changed it");
+	    //System.out.println(moves + " vs. " + move);
+	    if (moves != 0 && moves < move) {
+		//System.out.println("Next Move: " + row + ", " + col);
 		minRow[0] = row;
 	        minCol[0] = col;
 	    }
+	    // else {
+	    // 	System.out.println("Not Chosen: " + row + ", " + col);
+	    // }
 	    return moves;
 	} else {
 	    return 0;
@@ -60,6 +62,8 @@ public class KnightBoard{
 	    int moves = 8;
 	    int tempMove = 8;
 	    if (addKnight(row, col, level)) {
+		board[row][col] = level;
+		//System.out.println("Original: " + row + ", " + col);
 		for(int i = 0; i < rowMoves.length; i++) {
 		    tempMove = minMoves(row + rowMoves[i], col + colMoves[i], moves);
 		    if (tempMove != 0 && tempMove < moves) {
