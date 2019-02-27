@@ -141,7 +141,7 @@ public class KnightBoard{
 	}
 	//if board has any number not 0, throw illegal state exception
 	for (int i = 0; i < board.length; i++) {
-	    for (int j = 0; j < board.length; j++) {
+	    for (int j = 0; j < board[0].length; j++) {
 		if (board[i][j] != 0) {
 		    throw new IllegalStateException("board is unclean");
 		}
@@ -208,15 +208,15 @@ public class KnightBoard{
     }
 
 	    
-    public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(5,5);
-	// a.solve(0,0);
-	// System.out.println(a);
-	System.out.println(a.countSolutions(0,0));
-	for (int i = 0; i < 5; i++) {
-	    runTest(i);
-	}
-    }
+    // public static void main(String[] args) {
+    // 	KnightBoard a = new KnightBoard(5,4);
+    // 	// a.solve(0,0);
+    // 	// System.out.println(a);
+    // 	System.out.println(a.countSolutions(0,0));
+    // 	// for (int i = 0; i < 5; i++) {
+    // 	//     runTest(i);
+    // 	// }
+    // }
 }
 
 
