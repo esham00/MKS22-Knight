@@ -1,6 +1,10 @@
 
 public class KnightBoard{
     private int[][] board;
+    private int[] rowMoves = new int[]{1,1,2,2,-1,-1,-2,-2};
+    private int[] colMoves = new int[]{2,-2,1,-1,2,-2,1,-1};
+    private int[] minRow = new int [1];
+    private int[] minCol = new int[1];
     public KnightBoard(int startingRows, int startingCols) {
 	if (startingRows <= 0 || startingCols <= 0) {
 	    throw new IllegalArgumentException("Parameter cannot be less than or equal to 0");
@@ -28,24 +32,30 @@ public class KnightBoard{
 	}
 	return output;
     }
+    private void minMoves(int row, int col, int move){
+	    int moves = 0;
+	    for (int i = 0; i < rowMoves.length; i++) {
+		if (addKnight(row + rowMoves[i], col + colMoves[i], 0)) {
+		    moves++;
+		}
+	    }
+	    if (moves < move) {
+		minRow[0] = row;
+	        minCol[0] = col;
+	}
+    }
     private boolean solveH(int row, int col, int level) {
-	if (level == 1 + board.length * board[0].length) {
+	if (level == board.length * board[0].length) {
+	    board[row][col] = level;
 	    return true;
 	} else {
-	    if (row >= board.length || row < 0 || col < 0 || col >= board[0].length) {
-		return false;
-	    } 
 	    if (addKnight(row, col, level)) {
-		if (solveH(row + 2, col + 1, level + 1) == true
-		    || solveH(row + 2, col - 1, level + 1) == true
-		    || solveH(row + 1, col + 2, level + 1) == true
-		    || solveH(row + 1, col - 2, level + 1) == true
-		    || solveH(row - 1, col + 2, level + 1) == true
-		    || solveH(row - 1, col - 2, level + 1) == true
-		    || solveH(row - 2, col + 1, level + 1) == true
-		    || solveH(row - 2, col - 1, level + 1) == true) {
+		for(int i = 0; i < rowMoves.length; i++) {
+		    minMoves(row + rowMoves[i], col + colMoves[i], 8);
+		}
+		if (solveH(minRow[0], minCol[0], level+1)) {
 		    return true;
-		} 
+		}
 		removeKnight(row, col);
 	    }
 	}
@@ -54,6 +64,9 @@ public class KnightBoard{
     //adding knight at xy coordinate		
     private boolean addKnight(int r, int c, int level) {
 	//works only if a knight hasn't been there
+	if (r >= board.length || r < 0 || c < 0 || c >= board[0].length) {
+	    return false;
+	} 
 	if (board[r][c] == 0) {
 	    board[r][c] = level;
 	    return true;
@@ -64,6 +77,9 @@ public class KnightBoard{
     //removing knight at xy coordinate
     private boolean removeKnight(int r, int c) {
 	//works only if a knight has been there
+	if (r >= board.length || r < 0 || c < 0 || c >= board[0].length) {
+	    return false;
+	} 
 	if (board[r][c] > 0) {
 	    board[r][c] = 0;
 	    return true;
@@ -72,7 +88,7 @@ public class KnightBoard{
 	}
     }
     public boolean solve(int startingRow, int startingCol) {
-	// if (board.length <=2 || board[0].length <= 2 || (board.length % 2 == 1 && board[0].length % 2 == 1) || board.length == 4 || board[0].length == 4) {
+	// if (board.length <=2 || board[0].length <= 2 || (board.length % 2 == 1 && board[0].length % 2 == 1) || board.length == 4 || board[0].length == 4) {nnnn
 	//     return false;
 	// }
 	return solveH(startingRow, startingCol, 1);
@@ -81,11 +97,11 @@ public class KnightBoard{
 	return countSolutionsH(0,0,0);
     }
     private int countSolutionsH(int row, int col, int step) {
+	int solutions = 0;
 	if (step == board.length * board[0].length) {
 	    return 1;
 	}
-	int solutions = 0;
-	if (row < board.length && row >= 0 && col >= 0 && col < board[0].length && addKnight(row,col,step)) {
+	else if (row < board.length && row >= 0 && col >= 0 && col < board[0].length && addKnight(row,col,step)) {
 	    solutions += countSolutionsH(row + 2, col + 1, step + 1);
 	    solutions += countSolutionsH(row + 2, col - 1, step + 1);
 	    solutions += countSolutionsH(row + 1, col + 2, step + 1);
@@ -128,8 +144,9 @@ public class KnightBoard{
 	    
     public static void main(String[] args) {
 	KnightBoard a = new KnightBoard(3,4);
-	//a.solve(0,0);
-	//System.out.println(a);
-	System.out.println(a.countSolutions(0,0));
+	a.solve(0,0);
+	System.out.println(a);
+	//System.out.println(a.countSolutions(0,0));
     }
 }
+
