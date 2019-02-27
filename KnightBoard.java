@@ -162,7 +162,7 @@ public class KnightBoard{
 
 	    
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(10,10);
+	KnightBoard a = new KnightBoard(50,50);
 	a.solve(0,0);
 	System.out.println(a);
 	//System.out.println(a.countSolutions(0,0));
