@@ -40,15 +40,15 @@ public class KnightBoard{
 		    moves++;
 		}
 	    }
-	    //System.out.println(moves + " vs. " + move);
+	    System.out.println(moves + " vs. " + move);
 	    if (moves != 0 && moves < move) {
 		//System.out.println("Next Move: " + row + ", " + col);
 		minRow[0] = row;
 	        minCol[0] = col;
 	    }
-	    // else {
-	    // 	System.out.println("Not Chosen: " + row + ", " + col);
-	    // }
+	     else {
+	     	System.out.println("Not Chosen: " + row + ", " + col);
+	     }
 	    return moves;
 	} else {
 	    return 0;
@@ -56,15 +56,16 @@ public class KnightBoard{
     }
     private boolean solveH(int row, int col, int level) {
 	if (level == board.length * board[0].length) {
-	    board[row][col] = level;
+	    for(int i = 0; i < rowMoves.length; i++) {
+		addKnight(row + rowMoves[i], col + colMoves[i], level);
+	    }
 	    return true;
 	} else {
 	    int moves = 8;
 	    int tempMove = 8;
 	    if (addKnight(row, col, level)) {
 		//System.out.println(level);
-		board[row][col] = level;
-		//System.out.println("Original: " + row + ", " + col);
+		System.out.println("Original: " + row + ", " + col);
 		for(int i = 0; i < rowMoves.length; i++) {
 		    tempMove = minMoves(row + rowMoves[i], col + colMoves[i], moves);
 		    if (tempMove != 0 && tempMove < moves) {
@@ -161,7 +162,7 @@ public class KnightBoard{
 
 	    
     public static void main(String[] args) {
-	KnightBoard a = new KnightBoard(3,4);
+	KnightBoard a = new KnightBoard(5,5);
 	a.solve(0,0);
 	System.out.println(a);
 	//System.out.println(a.countSolutions(0,0));
