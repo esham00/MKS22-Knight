@@ -55,13 +55,14 @@ public class KnightBoard{
 	}
     }
     private boolean solveH(int row, int col, int level) {
-	if (level == 1 + board.length * board[0].length) {
+	if (level == board.length * board[0].length) {
 	    board[row][col] = level;
 	    return true;
 	} else {
 	    int moves = 8;
 	    int tempMove = 8;
 	    if (addKnight(row, col, level)) {
+		//System.out.println(level);
 		board[row][col] = level;
 		//System.out.println("Original: " + row + ", " + col);
 		for(int i = 0; i < rowMoves.length; i++) {
