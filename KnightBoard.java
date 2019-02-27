@@ -161,13 +161,13 @@ public class KnightBoard{
 	//exceptions
 	exceptions(startingRow, startingCol);
 	//count solutions helper
-	return countSolutionsH(startingRow, startingCol, 1)/86;
+	return countSolutionsH(startingRow, startingCol, 1)/8;
     }
     //count solutions helper
     private int countSolutionsH(int row, int col, int step) {
 	int solutions = 0;
 	//if the step reached the limits of the board: that's one solution
-	if (step == board.length * board[0].length) {
+	if (step > board.length * board[0].length) {
 	    return 1;
 	}
 	//if if it hasn't: test all moves
