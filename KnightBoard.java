@@ -32,16 +32,22 @@ public class KnightBoard{
 	}
 	return output;
     }
-    private void minMoves(int row, int col, int move){
+    private boolean minMoves(int row, int col, int move){
+	if (row < board.length && col < board[0].length && row >= 0 && col >=0) {
 	    int moves = 0;
 	    for (int i = 0; i < rowMoves.length; i++) {
-		if (addKnight(row + rowMoves[i], col + colMoves[i], 0)) {
+		if ( addKnight(row + rowMoves[i], col + colMoves[i], 0) && board[row+rowMoves[i]][col + colMoves[i]] == 0) {
 		    moves++;
 		}
 	    }
 	    if (moves < move) {
+		System.out.println(row + ", " + col);
 		minRow[0] = row;
 	        minCol[0] = col;
+	    }
+	    return true;
+	} else {
+	    return false;
 	}
     }
     private boolean solveH(int row, int col, int level) {
